@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import java.util.Date;
 import java.util.List;
 
 @Transactional(readOnly = true) //Doesn't make the DB stop, since it is a Read Only Operation
