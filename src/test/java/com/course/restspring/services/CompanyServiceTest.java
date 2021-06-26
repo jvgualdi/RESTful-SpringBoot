@@ -1,7 +1,7 @@
 package com.course.restspring.services;
 
-import com.course.restspring.pontointeligente.entities.Empresa;
-import com.course.restspring.pontointeligente.repositories.EmpresaRepository;
+import com.course.restspring.pontointeligente.entities.Company;
+import com.course.restspring.pontointeligente.repositories.CompanyRepository;
 import com.course.restspring.pontointeligente.services.CompanyService;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CompanyServiceTest {
 
     @MockBean
-    private EmpresaRepository empresaRepository;
+    private CompanyRepository companyRepository;
 
     @Autowired
     private CompanyService companyService;
@@ -34,20 +34,20 @@ public class CompanyServiceTest {
 
     @Before
     public void setUp() throws Exception{
-        BDDMockito.given(this.empresaRepository.findByCnpj(Mockito.anyString())).willReturn(new Empresa());
-        BDDMockito.given(this.empresaRepository.save(Mockito.any(Empresa.class))).willReturn(new Empresa());
+        BDDMockito.given(this.companyRepository.findByCnpj(Mockito.anyString())).willReturn(new Company());
+        BDDMockito.given(this.companyRepository.save(Mockito.any(Company.class))).willReturn(new Company());
     }
 
     @Test
     public void testFindCompanybyCnpj(){
-        Optional<Empresa> company = this.companyService.findByCnpj(CNPJ);
+        Optional<Company> company = this.companyService.findByCnpj(CNPJ);
 
         assertTrue(company.isPresent());
     }
 
     @Test
     public void testInsertCompany(){
-        Empresa company = this.companyService.insert(new Empresa());
+        Company company = this.companyService.insert(new Company());
         assertNotNull(company);
     }
 

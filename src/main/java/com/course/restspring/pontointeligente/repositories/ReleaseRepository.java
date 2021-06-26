@@ -1,6 +1,6 @@
 package com.course.restspring.pontointeligente.repositories;
 
-import com.course.restspring.pontointeligente.entities.Lancamento;
+import com.course.restspring.pontointeligente.entities.Release;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,12 +12,12 @@ import java.util.List;
 
 @Transactional(readOnly = true) //Doesn't make the DB stop, since it is a Read Only Operation
 @NamedQueries({
-    @NamedQuery(name = "LancamentoRepository.findByFuncionarioId",
-                query = "SELECT lanc FROM Lancamento lanc WHERE lanc.funcionario.id = :funcionarioId") })
+    @NamedQuery(name = "ReleaseRepository.findByEmployeeId",
+                query = "SELECT release FROM Release release WHERE release.employee.id = :employeeId") })
 
-public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
+public interface ReleaseRepository extends JpaRepository<Release, Long> {
 
-    List<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId);
+    List<Release> findByEmployeeId(@Param("employeeId") Long employeeId);
 
-    Page<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId, Pageable pageable);
+    Page<Release> findByEmployeeId(@Param("employeeId") Long employeeId, Pageable pageable);
 }

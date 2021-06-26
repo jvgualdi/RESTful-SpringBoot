@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "lancamento")
-public class Lancamento {
+@Table(name = "release")
+public class Release {
 
     private Long id;
     private Date data;
@@ -16,9 +16,9 @@ public class Lancamento {
     private Date dataCriacao;
     private Date dataAtualizacao;
     private TipoEnum tipo;
-    private Funcionario funcionario;
+    private Employee employee;
 
-    public Lancamento(){
+    public Release(){
     }
 
     @Id
@@ -88,12 +88,12 @@ public class Lancamento {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @PreUpdate
@@ -110,9 +110,9 @@ public class Lancamento {
 
     @Override
     public String toString(){
-        return "Lancamento [id=" + id + ", data=" + data + ", descricao=" + descricao +
+        return "Release [id=" + id + ", data=" + data + ", descricao=" + descricao +
                 ", localizacao=" + localizacao + ", dataCriacao=" + dataCriacao +
                 ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipo +
-                ", funcionario=" + funcionario + "]";
+                ", employee=" + employee + "]";
     }
 }

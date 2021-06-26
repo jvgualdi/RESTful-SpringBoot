@@ -1,7 +1,7 @@
 package com.course.restspring.repositories;
 
-import com.course.restspring.pontointeligente.entities.Empresa;
-import com.course.restspring.pontointeligente.repositories.EmpresaRepository;
+import com.course.restspring.pontointeligente.entities.Company;
+import com.course.restspring.pontointeligente.repositories.CompanyRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,31 +15,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public class EmpresaRepositoryTest {
+public class CompanyRepositoryTest {
 
     @Autowired
-    private EmpresaRepository empresaRepository;
+    private CompanyRepository companyRepository;
 
     private static final String CNPJ = "5146365000100";
 
     @Before
     public void setUp() throws  Exception{
-        Empresa empresa = new Empresa();
-        empresa.setRazaoSocial("Empresa de Exemplo");
-        empresa.setCnpj(CNPJ);
-        this.empresaRepository.save(empresa);
+        Company company = new Company();
+        company.setRazaoSocial("Company de Exemplo");
+        company.setCnpj(CNPJ);
+        this.companyRepository.save(company);
     }
 
     @After
     public final void tearDown(){
-        this.empresaRepository.deleteAll();
+        this.companyRepository.deleteAll();
     }
 
     @Test
     public void testFindByCnpj() {
-        Empresa empresa = this.empresaRepository.findByCnpj(CNPJ);
+        Company company = this.companyRepository.findByCnpj(CNPJ);
 
-        assertEquals(CNPJ, empresa.getCnpj());
+        assertEquals(CNPJ, company.getCnpj());
     }
 
 }

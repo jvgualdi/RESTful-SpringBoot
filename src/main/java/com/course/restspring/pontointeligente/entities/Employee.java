@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
-@Table(name = "funcionario")
-public class Funcionario {
+@Table(name = "employee")
+public class Employee {
 
     private Long id;
     private String nome;
@@ -23,10 +23,10 @@ public class Funcionario {
     private PerfilEnum perfil;
     private Date dataCriacao;
     private Date dataAtualizacao;
-    private Empresa empresa;
-    private List<Lancamento> lancamentos;
+    private Company company;
+    private List<Release> releases;
 
-    public Funcionario(){
+    public Employee(){
     }
 
     @Id
@@ -147,21 +147,21 @@ public class Funcionario {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    public Empresa getEmpresa() {
-        return empresa;
+    public Company getCompany() {
+        return company;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
-    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public List<Lancamento> getLancamentos() {
-        return lancamentos;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<Release> getReleases() {
+        return releases;
     }
 
-    public void setLancamentos(List<Lancamento> lancamentos) {
-        this.lancamentos = lancamentos;
+    public void setReleases(List<Release> releases) {
+        this.releases = releases;
     }
 
     @PreUpdate
@@ -178,8 +178,8 @@ public class Funcionario {
 
     @Override
     public String toString(){
-        return "Funcionario [id=" + id +" nome=" + nome + ", email= " + email + ", cpf=" + cpf +
-                ", empresa=" + empresa + ", valorHora" + valorHora + "perfil=" + perfil +
+        return "Employee [id=" + id +" nome=" + nome + ", email= " + email + ", cpf=" + cpf +
+                ", company=" + company + ", valorHora" + valorHora + "perfil=" + perfil +
                 ", horasTrabalhadasDia= " + horasTrabalhadasDia + ", horasAlmoco=" + horasAlmoco +
                 ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao + "]";
     }

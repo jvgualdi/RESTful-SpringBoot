@@ -6,8 +6,8 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "empresa")
-public class Empresa implements Serializable {
+@Table(name = "company")
+public class Company implements Serializable {
 
     private static final long serialVersionUID = 141481953116476081L;
 
@@ -16,9 +16,9 @@ public class Empresa implements Serializable {
     private String cnpj;
     private Date dataCriacao;
     private Date dataAtualizacao;
-    private List<Funcionario> funcionarios;
+    private List<Employee> employees;
 
-    public Empresa() {
+    public Company() {
     }
 
     @Id
@@ -67,13 +67,13 @@ public class Empresa implements Serializable {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setFuncionarios(List<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @PreUpdate
@@ -90,7 +90,7 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString(){
-        return "Empresa[id=" + id + ", razaoSocial=" +
+        return "Company[id=" + id + ", razaoSocial=" +
                 razaoSocial + ", cnpj=" + cnpj +
                 ", dataCriacao=" + dataCriacao +
                 ", dataAtualizacao=" + dataAtualizacao + "]";
