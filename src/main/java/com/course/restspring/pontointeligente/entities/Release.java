@@ -3,11 +3,12 @@ package com.course.restspring.pontointeligente.entities;
 import com.course.restspring.pontointeligente.enums.TipoEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "release")
-public class Release {
+public class Release implements Serializable {
 
     private Long id;
     private Date data;

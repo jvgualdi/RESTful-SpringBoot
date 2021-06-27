@@ -39,7 +39,7 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void testFindCompanybyCnpj(){
+    public void testFindCompanyByCnpj(){
         Optional<Company> company = this.companyService.findByCnpj(CNPJ);
 
         assertTrue(company.isPresent());

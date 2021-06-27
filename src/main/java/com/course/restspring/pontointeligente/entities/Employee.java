@@ -3,6 +3,7 @@ package com.course.restspring.pontointeligente.entities;
 import com.course.restspring.pontointeligente.enums.PerfilEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Entity
 @Table(name = "employee")
-public class Employee {
+public class Employee implements Serializable {
 
     private Long id;
     private String nome;
