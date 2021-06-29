@@ -2,6 +2,7 @@ package com.course.restspring.services;
 
 
 import com.course.restspring.pontointeligente.entities.Employee;
+import com.course.restspring.pontointeligente.entities.Release;
 import com.course.restspring.pontointeligente.repositories.EmployeeRepository;
 import com.course.restspring.pontointeligente.services.EmployeeService;
 import org.junit.Before;
@@ -33,7 +34,7 @@ public class EmployeeServiceTest {
     @Before
     public void setUp(){
         BDDMockito.given(this.employeeRepository.save(Mockito.any(Employee.class))).willReturn(new Employee());
-        //BDDMockito.given(this.employeeRepository.findById(Mockito.anyLong())).willReturn(new Optional<Employee>());
+        BDDMockito.given(this.employeeRepository.findById(Mockito.anyLong())).willReturn(Optional.of(new Employee()));
         BDDMockito.given(this.employeeRepository.findByEmail(Mockito.anyString())).willReturn(new Employee());
         BDDMockito.given(this.employeeRepository.findByCpf(Mockito.anyString())).willReturn(new Employee());
     }
@@ -56,5 +57,10 @@ public class EmployeeServiceTest {
         assertNotNull(testEmployee);
     }
 
+    @Test
+    public void testFindEmployeeById(){
+        Optional<Employee> employee = this.employeeService.findEmployeeById(1L);
+        assertTrue(employee.isPresent());
+    }
 
 }
