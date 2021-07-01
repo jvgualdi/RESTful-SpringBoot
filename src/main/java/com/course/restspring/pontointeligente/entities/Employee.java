@@ -77,7 +77,7 @@ public class Employee implements Serializable {
         this.cpf = cpf;
     }
 
-    @Column(name = "valor_hora", nullable = false)
+    @Column(name = "valor_hora", nullable = true)
     public BigDecimal getValorHora() {
         return valorHora;
     }
@@ -91,7 +91,7 @@ public class Employee implements Serializable {
         this.valorHora = valorHora;
     }
 
-    @Column(name = "horas_trabalhadas_dia", nullable = false)
+    @Column(name = "horas_trabalhadas_dia", nullable = true)
     public Float getHorasTrabalhadasDia() {
         return horasTrabalhadasDia;
     }
@@ -105,7 +105,7 @@ public class Employee implements Serializable {
         this.horasTrabalhadasDia = horasTrabalhadasDia;
     }
 
-    @Column(name = "horas_almoco", nullable = false)
+    @Column(name = "horas_almoco", nullable = true)
     public Float getHorasAlmoco() {
         return horasAlmoco;
     }

@@ -89,9 +89,6 @@ public class EmployeeRepositoryTest {
         employee.setCpf(CPF);
         employee.setEmail(EMAIL);
         employee.setCompany(company);
-        employee.setHorasAlmoco(new Float(2));
-        employee.setHorasTrabalhadasDia(new Float(8));
-        employee.setValorHora(new BigDecimal(80));
         return employee;
     }
 
