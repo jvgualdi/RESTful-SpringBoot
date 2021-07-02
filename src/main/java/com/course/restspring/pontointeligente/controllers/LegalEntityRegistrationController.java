@@ -14,16 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-@RequestMapping("/api/register-legalentity")
+@RequestMapping("/")
+@CrossOrigin(origins = "*")
 public class LegalEntityRegistrationController {
 
     private static final Logger log = LoggerFactory.getLogger(LegalEntityRegistrationController.class);
@@ -37,7 +35,7 @@ public class LegalEntityRegistrationController {
     public LegalEntityRegistrationController (){
     }
 
-    @PostMapping
+    @PostMapping(value = "legal-entity-register", consumes = "application/json")
     public ResponseEntity<Response<LegalEntityRegistrationDto>> legalEntityRegistration(@Valid @RequestBody LegalEntityRegistrationDto legalEntityRegistrationDto,
                                                                                         BindingResult result) throws NoSuchAlgorithmException {
         log.info("Registring Legal Entity {}", legalEntityRegistrationDto.toString());
@@ -60,7 +58,7 @@ public class LegalEntityRegistrationController {
         this.companyService.insert(company);
         employee.setCompany(company);
         this.employeeService.insert(employee);
-        response.setData(convertEmployeeToLegalEntity(employee));
+        response.setData(convertEmployeeToLegalEntityDto(employee));
         return ResponseEntity.ok(response);
     }
 
@@ -96,7 +94,7 @@ public class LegalEntityRegistrationController {
         }
     }
 
-    public LegalEntityRegistrationDto convertEmployeeToLegalEntity(Employee employee){
+    public LegalEntityRegistrationDto convertEmployeeToLegalEntityDto(Employee employee){
         LegalEntityRegistrationDto legalEntity = new LegalEntityRegistrationDto();
         legalEntity.setId(employee.getId());
         legalEntity.setCpf(employee.getCpf());
