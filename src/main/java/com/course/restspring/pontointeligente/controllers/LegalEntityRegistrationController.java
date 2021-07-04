@@ -21,7 +21,6 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/")
-@CrossOrigin(origins = "*")
 public class LegalEntityRegistrationController {
 
     private static final Logger log = LoggerFactory.getLogger(LegalEntityRegistrationController.class);
@@ -37,12 +36,11 @@ public class LegalEntityRegistrationController {
 
     @PostMapping(value = "legal-entity-register", consumes = "application/json")
     public ResponseEntity<Response<LegalEntityRegistrationDto>> legalEntityRegistration(@Valid @RequestBody LegalEntityRegistrationDto legalEntityRegistrationDto,
-                                                                                        BindingResult result) throws NoSuchAlgorithmException {
+                                                                                        BindingResult result)  {
         log.info("Registring Legal Entity {}", legalEntityRegistrationDto.toString());
         Response<LegalEntityRegistrationDto> response = new Response<LegalEntityRegistrationDto>();
         verifyLegalEntity(legalEntityRegistrationDto, result);
-        Employee employee = convertLegalEntityIntoEmployee(legalEntityRegistrationDto, result);
-        Company company = convertLegalEntityIntoCompany(legalEntityRegistrationDto);
+
 
         try {
             if(result.hasErrors()){
@@ -50,16 +48,17 @@ public class LegalEntityRegistrationController {
                 result.getAllErrors().forEach(objectError -> response.getErrors().add(objectError.getDefaultMessage()));
                 return ResponseEntity.badRequest().body(response);
             }
-            this.employeeService.insert(employee);
+            Employee employee = convertLegalEntityIntoEmployee(legalEntityRegistrationDto, result);
+            Company company = convertLegalEntityIntoCompany(legalEntityRegistrationDto);
             this.companyService.insert(company);
+            employee.setCompany(company);
+            this.employeeService.insert(employee);
+            response.setData(convertEmployeeToLegalEntityDto(employee));
+            return ResponseEntity.ok(response);
         }catch (Exception e){
             log.error("Error when inserting on DataBase", e);
+            return ResponseEntity.badRequest().body(response);
         }
-        this.companyService.insert(company);
-        employee.setCompany(company);
-        this.employeeService.insert(employee);
-        response.setData(convertEmployeeToLegalEntityDto(employee));
-        return ResponseEntity.ok(response);
     }
 
     public Employee convertLegalEntityIntoEmployee(LegalEntityRegistrationDto legalEntityRegistrationDto, BindingResult result)

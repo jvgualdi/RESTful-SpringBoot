@@ -3,7 +3,6 @@ package com.course.restspring.pontointeligente.dtos;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -29,7 +28,7 @@ public class LegalEntityRegistrationDto {
     }
 
     @NotEmpty(message = "Name can no be empty.")
-    @Length(min = 3, max = 200, message = "Name must have between 3 and 200 caracters.")
+    @Length(min = 3, max = 200, message = "Name must have between 3 and 200 characters.")
     public String getName() {
         return name;
     }
@@ -49,7 +48,7 @@ public class LegalEntityRegistrationDto {
     }
 
     @NotEmpty(message = "Email can not be empty.")
-    @Length(min = 5, max = 200, message = "Email must have between 5 and 200 caracters")
+    @Length(min = 5, max = 200, message = "Email must have between 5 and 200 characters")
     @Email(message = "Invalid email")
     public String getEmail() {
         return email;
@@ -79,7 +78,7 @@ public class LegalEntityRegistrationDto {
     }
 
     @NotEmpty(message = "Social Reason can not be empty.")
-    @Length(min = 5, max = 200, message = "Social Reason must have between 5 and 200 caracters")
+    @Length(min = 5, max = 200, message = "Social Reason must have between 5 and 200 characters")
     public String getSocialReason() {
         return socialReason;
     }
@@ -91,7 +90,7 @@ public class LegalEntityRegistrationDto {
     @Override
     public String toString(){
         return "LegalEntityRegistrationDto [id=" + id + ", name=" + name + ", email=" + email +
-                ", senha=" + password + ", cpf=" + cpf +", socialReason=" + socialReason +
+                ", password=" + password + ", cpf=" + cpf +", socialReason=" + socialReason +
                 ", cnpj=" + cnpj +"]";
     }
 }
