@@ -38,7 +38,7 @@ public class IndividualRegistrationController {
     public IndividualRegistrationController(){
     }
 
-    @PostMapping("individual-registration")
+    @PostMapping(value = "individual-registration")
     public ResponseEntity<Response<IndividualRegistrationDto>> individualRegistration(@Valid @RequestBody IndividualRegistrationDto individualRegistrationDto,
                                                                                       BindingResult result){
         log.info("Registring individual {}", individualRegistrationDto.toString());
