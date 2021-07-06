@@ -60,7 +60,6 @@ public class IndividualRegistrationController {
             log.error(e.toString());
             return ResponseEntity.badRequest().body(response);
         }
-
     }
 
     public void validatesIndividualRegistration (IndividualRegistrationDto individualDto, BindingResult result){
