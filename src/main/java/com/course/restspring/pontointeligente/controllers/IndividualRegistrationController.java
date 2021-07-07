@@ -11,19 +11,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/")
 public class IndividualRegistrationController {
 
@@ -52,7 +52,7 @@ public class IndividualRegistrationController {
             }
             Employee employee = mapIndividualDtoToEmployee(individualRegistrationDto);
             employee.setCompany(companyService.findByCnpj(individualRegistrationDto.getCnpj()).get());
-            this.employeeService.insert(employee);
+            employee = this.employeeService.insert(employee);
             response.setData(this.mapEmployeeToIndividualDto(employee));
             return ResponseEntity.ok(response);
         }catch (Exception e){

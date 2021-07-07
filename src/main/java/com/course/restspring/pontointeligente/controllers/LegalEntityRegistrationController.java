@@ -52,7 +52,7 @@ public class LegalEntityRegistrationController {
             Company company = convertLegalEntityIntoCompany(legalEntityRegistrationDto);
             this.companyService.insert(company);
             employee.setCompany(company);
-            this.employeeService.insert(employee);
+            employee = this.employeeService.insert(employee);
             response.setData(convertEmployeeToLegalEntityDto(employee));
             return ResponseEntity.ok(response);
         }catch (Exception e){
