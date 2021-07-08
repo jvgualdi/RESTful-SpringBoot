@@ -169,6 +169,7 @@ public class ReleaseController {
         }else{
             result.addError(new ObjectError("type", "Invalid type"));
         }
+        return release;
     }
 
     protected ReleaseDto mapReleaseDto(Release release){
